@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">budgetM_kotlin</string>
+    <string name="new_category_prompt">Enter category name:</string>
+    <string name="item_name_prompt">Enter item name:</string>
+    <string name="item_cost_prompt">Enter the cost in dollars:</string>
+    <string name="item_description_prompt">Enter a description (optional):</string>
+    <string name="save">Save</string>
+</resources>
