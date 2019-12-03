@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
@@ -29,11 +31,21 @@ class CategoryAllActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        if (item.itemId == R.id.miHome) {
-//            startActivity(Intent(applicationContext, CategoryAllActivity::class.java))
-//            finish()
-//        }
-
+        if (item.itemId == R.id.miHome) {
+            startActivity(Intent(applicationContext, CategoryAllActivity::class.java))
+            finish()
+        } else if (item.itemId == R.id.miLogin) {
+            if (FirebaseAuth.getInstance().currentUser == null) {
+                startActivity(Intent(applicationContext, LoginActivity::class.java))
+                finish()
+            } else
+                Toast.makeText(this, "Logout first!", Toast.LENGTH_LONG).show()
+        } else if (item.itemId == R.id.miLogout) {
+            FirebaseAuth.getInstance().signOut();
+            startActivity(Intent(applicationContext, CategoryAllActivity::class.java))
+            Toast.makeText(this, "Logged out!", Toast.LENGTH_LONG).show()
+            finish()
+        }
         return super.onOptionsItemSelected(item)
     }
 
@@ -41,6 +53,7 @@ class CategoryAllActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category_all)
 
+        navbar.title = getString(R.string.category_all_title)
         setSupportActionBar(navbar)
 
         val user = FirebaseAuth.getInstance().currentUser
@@ -94,9 +107,14 @@ class CategoryAllActivity : AppCompatActivity() {
             holder.itemView.findViewById<TextView>(R.id.textViewNumberOfItems).text = "Items: ${model.itemIds.size}"
 
             holder.itemView.setOnClickListener {
-                var i = Intent(applicationContext, ItemAllActivity::class.java)
-                i.putExtra("category", model)
-                startActivity(i)
+                if (FirebaseAuth.getInstance().currentUser != null) {
+                    val i = Intent(applicationContext, ItemAllActivity::class.java)
+                    i.putExtra("category", model)
+                    startActivity(i)
+                } else {
+                    startActivity(Intent(applicationContext, LoginActivity::class.java))
+                    finish()
+                }
             }
         }
 

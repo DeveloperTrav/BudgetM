@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/miItemHome"
+        android:icon="@drawable/ic_home"
+        android:title="@string/home"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/miItemEditCategory"
+        android:title="@string/edit_category" />
+    <item
+        android:id="@+id/miItemDelCategory"
+        android:title="@string/del_category"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/miItemLogout"
+        android:title="@string/logout"
+        app:showAsAction="never" />
+</menu>
