@@ -3,9 +3,7 @@ package com.example.budgetm
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,15 +16,32 @@ import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_category_all.*
 import java.math.BigDecimal
 import java.math.RoundingMode
+import java.util.*
 
 class CategoryAllActivity : AppCompatActivity() {
 
     val db = FirebaseFirestore.getInstance()
     private var adapter: Adapter? = null
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_navbar, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        if (item.itemId == R.id.miHome) {
+//            startActivity(Intent(applicationContext, CategoryAllActivity::class.java))
+//            finish()
+//        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category_all)
+
+        setSupportActionBar(navbar)
 
         val user = FirebaseAuth.getInstance().currentUser
 
