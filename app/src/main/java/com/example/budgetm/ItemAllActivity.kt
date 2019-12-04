@@ -50,17 +50,6 @@ class ItemAllActivity : AppCompatActivity() {
             i.putExtra("category", category)
             startActivity(i)
             finish()
-        } else if (item.itemId == R.id.miItemDelCategory) {
-            for (item in category!!.itemIds) {
-                db.collection("items").document(item)
-                    .delete()
-            }
-
-            db.collection("categories").document(category!!.id.toString())
-                .delete()
-                .addOnSuccessListener { Toast.makeText(this, "Category Successfully Deleted!", Toast.LENGTH_LONG).show() }
-
-            startActivity(Intent(applicationContext, CategoryAllActivity::class.java))
         } else if (item.itemId == R.id.miItemLogout) {
             FirebaseAuth.getInstance().signOut();
             startActivity(Intent(applicationContext, CategoryAllActivity::class.java))

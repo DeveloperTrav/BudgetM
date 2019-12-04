@@ -11,10 +11,6 @@
         android:id="@+id/miItemEditCategory"
         android:title="@string/edit_category" />
     <item
-        android:id="@+id/miItemDelCategory"
-        android:title="@string/del_category"
-        app:showAsAction="never" />
-    <item
         android:id="@+id/miItemLogout"
         android:title="@string/logout"
         app:showAsAction="never" />
