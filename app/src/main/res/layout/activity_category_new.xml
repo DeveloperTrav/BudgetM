@@ -4,37 +4,63 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryLight"
     tools:context=".CategoryNewActivity">
 
-    <LinearLayout
-        android:layout_width="282dp"
-        android:layout_height="371dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarCategoryNew"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
         android:orientation="vertical"
+        android:padding="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.539"
-        android:gravity="center">
+        app:layout_constraintTop_toBottomOf="@+id/toolbarCategoryNew">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="30dp"
+            android:text="@string/new_category"
+            android:textColor="@color/primaryText"
+            android:textSize="25dp" />
 
         <EditText
-            android:layout_width="264dp"
+            android:id="@+id/editTextCategoryName"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorPrimaryLight"
+            android:hint="@string/new_category_prompt"
+            android:textAlignment="center"
+            android:textColor="@color/primaryText"
+            android:textColorHint="@color/scondaryText"
+            android:textSize="19dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/editTextCategoryName" android:hint="@string/new_category_prompt"
-            android:textColorHint="@color/primaryText" android:background="@color/colorAccent"/>
-        <Button
-            android:text="@string/save"
-            android:layout_width="218dp"
-            android:layout_height="wrap_content" android:id="@+id/buttonSaveCategory"
-            android:background="@color/colorAccent"/>
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="25dp">
+
+            <Button
+                android:id="@+id/buttonSaveCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/save"
+                android:textAllCaps="false"
+                android:textSize="20dp" />
+        </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

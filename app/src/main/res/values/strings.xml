@@ -1,14 +1,17 @@
 <resources>
-    <string name="app_name">budgetM_kotlin</string>
-    <string name="category_all_title">All Categories</string>
+    <string name="app_name">BudgetM</string>
     <string name="new_category_prompt">Enter category name:</string>
     <string name="item_name_prompt">Enter item name:</string>
     <string name="item_cost_prompt">Enter the cost in dollars:</string>
     <string name="item_description_prompt">Enter a description (optional):</string>
     <string name="save">Save</string>
     <string name="home">Home</string>
+    <string name="category_all_title">All Categories</string>
+    <string name="new_category">New Category</string>
     <string name="edit_category">Edit Category</string>
     <string name="del_category">Delete Category</string>
+    <string name="new_item">New Item</string>
+    <string name="edit_item">Edit Item</string>
     <string name="login">Login</string>
     <string name="logout">Logout</string>
 </resources>

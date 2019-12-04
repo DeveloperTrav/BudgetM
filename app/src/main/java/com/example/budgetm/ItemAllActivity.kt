@@ -1,12 +1,17 @@
 package com.example.budgetm
 
+import android.content.Context
 import android.content.Intent
+import android.graphics.*
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Icon
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
@@ -14,10 +19,18 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_item_all.*
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import androidx.core.app.ComponentActivity
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import androidx.core.content.ContextCompat
+
 
 class ItemAllActivity : AppCompatActivity() {
 
     val db = FirebaseFirestore.getInstance()
+    private val clearPaint = Paint().apply { xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR) }
     private var adapter: Adapter? = null
     private var category: Category? = null
 
@@ -75,6 +88,56 @@ class ItemAllActivity : AppCompatActivity() {
 
         recyclerViewAllItems.layoutManager = LinearLayoutManager(this)
         recyclerViewAllItems.adapter = adapter
+        ItemTouchHelper(
+            object : ItemTouchHelper.SimpleCallback(
+                ItemTouchHelper.UP or ItemTouchHelper.DOWN,
+                ItemTouchHelper.LEFT
+            ) {
+                override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder):
+                        Boolean {
+                    return false
+                }
+
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    val item = adapter!!.getItem(viewHolder.adapterPosition)
+
+                    category!!.itemIds.remove(item.id)
+                    category!!.total -= item.cost!!
+                    db.collection("categories").document(category!!.id.toString())
+                        .set(category!!)
+
+                    db.collection("items").document(item.id.toString())
+                        .delete()
+                }
+
+                override fun onChildDraw(c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, dX: Float,
+                    dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
+                    super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+
+                    val itemView = viewHolder.itemView
+                    val itemHeight = itemView.bottom - itemView.top
+                    val background = ColorDrawable(Color.RED)
+                    val icon = ContextCompat.getDrawable(applicationContext, R.drawable.ic_delete)
+                    val iconTop = itemView.top + (itemHeight - icon!!.intrinsicHeight) / 2
+                    val iconMargin = (itemHeight - icon!!.intrinsicHeight) / 2
+                    val iconLeft = itemView.right - iconMargin - icon.intrinsicWidth
+                    val iconRight = itemView.right - iconMargin
+                    val iconBottom = iconTop + icon.intrinsicHeight
+                    val isCanceled = dX == 0f && !isCurrentlyActive
+
+                    if (isCanceled) {
+                        clearCanvas(c, itemView.right + dX, itemView.top.toFloat(), itemView.right.toFloat(), itemView.bottom.toFloat())
+                        super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                        return
+                    }
+
+                    background.setBounds(itemView.right + dX.toInt(), itemView.top, itemView.right, itemView.bottom)
+                    background.draw(c)
+
+                    icon.setBounds(iconLeft, iconTop, iconRight, iconBottom)
+                    icon.draw(c)
+                }
+            }).attachToRecyclerView(recyclerViewAllItems)
 
         fabNewItem.setOnClickListener {
             if (user == null) {
@@ -87,6 +150,10 @@ class ItemAllActivity : AppCompatActivity() {
                 startActivity(i)
             }
         }
+    }
+
+    private fun clearCanvas(c: Canvas?, left: Float, top: Float, right: Float, bottom: Float) {
+        c?.drawRect(left, top, right, bottom, clearPaint)
     }
 
     override fun onStart() {
@@ -111,7 +178,10 @@ class ItemAllActivity : AppCompatActivity() {
             holder.itemView.findViewById<TextView>(R.id.textViewItemDescription).text = model.description
 
             holder.itemView.setOnClickListener {
-
+                val i = Intent(applicationContext, ItemNewActivity::class.java)
+                i.putExtra("item", model)
+                i.putExtra("category", category)
+                startActivity(i)
             }
         }
 

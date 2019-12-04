@@ -19,6 +19,7 @@
             android:id="@+id/textViewItemName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
             android:textColor="@color/primaryText"
             android:textSize="36sp" />
 
@@ -26,6 +27,7 @@
             android:id="@+id/textViewItemCost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
             android:textColor="@color/primaryText"
             android:textSize="28sp" />
 
@@ -33,6 +35,7 @@
             android:id="@+id/textViewItemDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
             android:textColor="@color/scondaryText"
             android:textSize="22sp" />
     </LinearLayout>

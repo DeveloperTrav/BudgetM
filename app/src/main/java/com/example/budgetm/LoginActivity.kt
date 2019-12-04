@@ -28,20 +28,20 @@ class LoginActivity : AppCompatActivity() {
                 .build(),
             RC_SIGN_IN
         )
+    }
 
-        fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-            super.onActivityResult(requestCode, resultCode, data)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
 
-            if(requestCode == RC_SIGN_IN) {
-                val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+        if(requestCode == RC_SIGN_IN) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
 
-                try {
-                    startActivity(Intent(applicationContext, CategoryAllActivity::class.java))
-                    finish()
-                } catch (e: ApiException) {
-                    startActivity(Intent(applicationContext, CategoryAllActivity::class.java))
-                    Toast.makeText(this, "Error Logging in!", Toast.LENGTH_LONG).show()
-                }
+            try {
+                startActivity(Intent(applicationContext, CategoryAllActivity::class.java))
+                finish()
+            } catch (e: ApiException) {
+                startActivity(Intent(applicationContext, CategoryAllActivity::class.java))
+                Toast.makeText(this, "Error Logging in!", Toast.LENGTH_LONG).show()
             }
         }
     }

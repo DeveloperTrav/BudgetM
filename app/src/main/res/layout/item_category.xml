@@ -20,6 +20,7 @@
             android:id="@+id/textViewCategoryName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
             android:textColor="@color/primaryText"
             android:textSize="36sp" />
 
@@ -27,6 +28,7 @@
             android:id="@+id/textViewCategoryTotal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
             android:textColor="@color/primaryText"
             android:textSize="26sp" />
 
@@ -34,6 +36,7 @@
             android:id="@+id/textViewNumberOfItems"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
             android:textColor="@color/scondaryText"
             android:textSize="26sp" />
     </LinearLayout>

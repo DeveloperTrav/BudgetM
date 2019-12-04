@@ -4,53 +4,85 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryLight"
     tools:context=".ItemNewActivity">
 
-    <LinearLayout
-        android:layout_width="282dp"
-        android:layout_height="371dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarItemNew"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
         android:orientation="vertical"
+        android:padding="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:gravity="center">
+        app:layout_constraintTop_toBottomOf="@+id/toolbarItemNew">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="30dp"
+            android:text="@string/new_item"
+            android:textColor="@color/primaryText"
+            android:textSize="25dp" />
 
         <EditText
-            android:layout_width="264dp"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/editTextItemName" android:hint="@string/item_name_prompt"
-            android:textColorHint="@color/primaryText" android:textColor="@color/primaryText"
-            android:paddingBottom="40px" android:background="@color/colorAccent"/>
+            android:id="@+id/editTextItemName"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorPrimaryLight"
+            android:hint="@string/item_name_prompt"
+            android:textAlignment="center"
+            android:textColor="@color/primaryText"
+            android:textColorHint="@color/scondaryText"
+            android:textSize="19dp" />
+
         <EditText
-            android:layout_width="264dp"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:ems="10"
-            android:id="@+id/editTextItemCost" android:hint="@string/item_cost_prompt"
-            android:textColorHint="@color/primaryText" android:textColor="@color/primaryText"
-            android:paddingBottom="40px" android:background="@color/colorAccent"/>
+            android:id="@+id/editTextItemCost"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorPrimaryLight"
+            android:hint="@string/item_cost_prompt"
+            android:textAlignment="center"
+            android:textColor="@color/primaryText"
+            android:textColorHint="@color/scondaryText"
+            android:textSize="19dp" />
+
         <EditText
-            android:layout_width="264dp"
+            android:id="@+id/editTextItemDescription"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorPrimaryLight"
+            android:hint="@string/item_description_prompt"
+            android:textAlignment="center"
+            android:textColor="@color/primaryText"
+            android:textColorHint="@color/scondaryText"
+            android:textSize="19dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textMultiLine"
-            android:gravity="start|top"
-            android:ems="10"
-            android:id="@+id/editTextItemDescription" android:hint="@string/item_description_prompt"
-            android:textColor="@color/primaryText" android:textColorHint="@color/primaryText"
-            android:paddingBottom="40px" android:background="@color/colorAccent"/>
-        <Button
-            android:text="@string/save"
-            android:layout_width="218dp"
-            android:layout_height="wrap_content" android:id="@+id/buttonSaveItem"
-            android:background="@color/colorAccent"/>
+            android:gravity="center"
+            android:padding="25dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonSaveItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/save"
+                android:textAllCaps="false"
+                android:textSize="20dp" />
+
+        </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
